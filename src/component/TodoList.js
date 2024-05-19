@@ -21,17 +21,18 @@ const TodoList = () => {
            setTodos(newTodos)
            setEditIndex(-1);
         }
+        setInputValue("");
     }
     const handleDeleteTodo=(index)=>{
         const newTodos = [...todos];
        newTodos.splice(index,1);
        setTodos(newTodos);
        setEditIndex(-1);
+       setInputValue("");
     }
     const handleEditTodo = (val,index)=>{
         setInputValue(val);
         setEditIndex(index);
-
     }
 
 return(
@@ -44,10 +45,10 @@ return(
             todos.map((val,index)=>{
               return (
               <li key={index}>
-                <div>{val}</div>
+                <div>{val.length >= 20?val.substring(0, 20)+"...":val}</div>
                 <div className='useable-buttons'>
               <button onClick={() => handleDeleteTodo(index)}><i class="fa fa-trash"></i></button>
-              <button onClick={()=> handleEditTodo(val,index)}>Edit</button>
+              <button onClick={()=> handleEditTodo(val,index)}><i class="fas fa-edit"></i></button>
               </div>
                 </li>
             )
